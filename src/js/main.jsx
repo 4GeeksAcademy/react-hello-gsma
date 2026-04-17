@@ -10,9 +10,45 @@ import '../styles/index.css'
 
 // components
 import Home from './components/Home';
+import { Contador } from './components/Contador';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Home/>
-  </React.StrictMode>,
-)
+
+
+let segundos = 0;
+let  activo = true;
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+const render = () => {
+  root.render(
+    <React.StrictMode>
+    <Contador
+    numero= {segundos}
+    />
+  </React.StrictMode>
+  )
+} 
+
+
+render();
+
+setInterval(() => {
+  if (activo) {
+    segundos++;
+    render();
+  }
+}, 1000);
+
+// Desde consola
+
+window.stopCounter = () => (activo = false);
+
+
+window.startCounter = () => (activo = true);
+
+window.resetCounter = () => {
+  segundos = 0;
+  render();
+};
+
+
+render();
