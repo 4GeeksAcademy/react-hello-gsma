@@ -15,40 +15,52 @@ import { Contador } from './components/Contador';
 
 
 let segundos = 0;
-let  activo = true;
+let activo = true;
+let cuentaAtras = false;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 const render = () => {
   root.render(
     <React.StrictMode>
-    <Contador
-    numero= {segundos}
-    />
-  </React.StrictMode>
-  )
-} 
-
+      <Contador numero={segundos} />
+    </React.StrictMode>
+  );
+};
 
 render();
 
 setInterval(() => {
   if (activo) {
-    segundos++;
+    if (cuentaAtras) {
+      if (segundos > 0) {
+        segundos--;
+      }
+    } else {
+      segundos++;
+    }
     render();
   }
 }, 1000);
 
-// Desde consola
-
-window.stopCounter = () => (activo = false);
 
 
-window.startCounter = () => (activo = true);
+window.stopCounter = () => {
+  activo = false;
+};
+
+window.startCounter = () => {
+  activo = true;
+};
 
 window.resetCounter = () => {
   segundos = 0;
   render();
 };
 
-
-render();
+window.startCountdown = (numeroInicial) => {
+  segundos = numeroInicial;
+  cuentaAtras = true;
+  activo = true;
+  render();
+};
