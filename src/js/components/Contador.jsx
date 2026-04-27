@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import propTypes from "prop-types";
 
 export const Contador = (props) => {
   const numero = props.numero;
   const digitos = numero.toString().padStart(6, "0").split("");
+
+
+  const [valorInput, setValorInput] = useState("");
 
   return (
     <div className="container text-center">
@@ -23,21 +26,31 @@ export const Contador = (props) => {
         ))}
       </div>
 
-    
+
+      <div className="mb-3">
+        <input
+          type="number"
+          className="form-control w-25 mx-auto"
+          placeholder="Introduce número"
+          value={valorInput}
+          onChange={(e) => setValorInput(e.target.value)}
+        />
+      </div>
+
       <div className="d-flex justify-content-center gap-3 flex-wrap">
 
         <button
           className="btn btn-danger"
           onClick={() => window.stopCounter()}
         >
-           Stop
+          Stop
         </button>
 
         <button
           className="btn btn-success"
           onClick={() => window.startCounter()}
         >
-           Start
+          Start
         </button>
 
         <button
@@ -47,13 +60,13 @@ export const Contador = (props) => {
           Reset
         </button>
 
+     
         <button
           className="btn btn-primary"
-          onClick={() => window.startCountdown(100)}
+          onClick={() => window.startCountdown(Number(valorInput))}
         >
-           Countdown 100
+          Countdown
         </button>
-
 
       </div>
     </div>
