@@ -47,14 +47,17 @@ setInterval(() => {
 
 window.stopCounter = () => {
   activo = false;
+   cuentaAtras = false;
 };
 
 window.startCounter = () => {
   activo = true;
+   cuentaAtras = false;
 };
 
 window.resetCounter = () => {
   segundos = 0;
+  cuentaAtras = false;
   render();
 };
 
